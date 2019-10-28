@@ -19,14 +19,7 @@ namespace uClassify.TextClassifier.Utility.UnitTest
         public void TestMethod2()
         {
             uClassifyInterface IuClassify = new uClassifyProvider();
-            var A = IuClassify.ClassifyText("FindTags", "I Love You!");
-            var B = IuClassify.ClassifyText("FindTags", "I Love You!",true);
-        }
-
-        [TestMethod]
-        public void TestMethod3()
-        {
-            uClassifyInterface IuClassify = new uClassifyProvider();
+            
             List<string> textlist = new List<string>();
             textlist.Add("I Love You!");
             textlist.Add("I Only Have Love For You!");
@@ -34,8 +27,32 @@ namespace uClassify.TextClassifier.Utility.UnitTest
             textlist.Add("I Love You Who You Are");
             textlist.Add("I Love Your Soul");
 
-            var A = IuClassify.ClassifyText("FindTags", textlist);
-            var B = IuClassify.ClassifyText("FindTags", textlist,true);
+            var A = IuClassify.ClassifyText("FindTags", "I Love You!");
+            var B = IuClassify.ClassifyText("FindTags", "I Love You!", true);
+            var C = IuClassify.ClassifyText("FindTags", textlist);
+            var D = IuClassify.ClassifyText("FindTags", textlist, true);
+        }
+
+        [TestMethod]
+        public void TestMethod3()
+        {
+            uClassifyInterface IuClassify = new uClassifyProvider();
+
+            List<string> textlist = new List<string>();
+            textlist.Add("I Love You!");
+            textlist.Add("I Only Have Love For You!");
+            textlist.Add("I Love You All of You");
+            textlist.Add("I Love You Who You Are");
+            textlist.Add("I Love Your Soul");
+
+            var A = IuClassify.ClassifyTextKeywords("FindTags", "I Love You!");
+            var B = IuClassify.ClassifyTextKeywords("FindTags", "I Love You!", true);
+            var C = IuClassify.ClassifyTextKeywords("FindTags", textlist);
+            var D = IuClassify.ClassifyTextKeywords("FindTags", textlist, true);
+        }
+        public void TestMethod4()
+        {
+            
         }
     }
 }

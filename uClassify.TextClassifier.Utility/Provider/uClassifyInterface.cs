@@ -18,6 +18,8 @@ namespace uClassify.TextClassifier.Utility.Provider
         string ClassifyTextWithLanguage(string classifierName, string language, List<string> textList);
         string ClassifyTextKeywords(string classifierName, string text);
         string ClassifyTextKeywords(string classifierName, List<string> textList);
+        List<KeywordsResponse> ClassifyTextKeywords(string classifierName, string text, bool isObject = false);
+        List<KeywordsResponse> ClassifyTextKeywords(string classifierName, List<string> textList, bool isObject = false);
         string GetClassifierInformation(string classifierName);
         string CreateClassifier(string classifierName);
         string RemoveClassifier(string classifierName);

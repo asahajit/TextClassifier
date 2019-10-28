@@ -48,12 +48,36 @@ namespace uClassify.TextClassifier.Utility.Provider
 
         public string ClassifyTextKeywords(string classifierName, List<string> textList)
         {
-            throw new NotImplementedException();
+            string ApiPath = CommonUtils.Format(config.ClassifyTextKeywordsUrl, new { username = config.UserName, classifierName = classifierName });
+            string body = JsonConvert.SerializeObject(new { texts = textList });
+            return APIRequestHelper.DoAPIRequest(config.BaseUrl, ApiPath, config.Read_API_KEY, body, "POST");
         }
 
         public string ClassifyTextKeywords(string classifierName, string text)
         {
-            throw new NotImplementedException();
+            string ApiPath = CommonUtils.Format(config.ClassifyTextKeywordsUrl, new { username = config.UserName, classifierName = classifierName });
+            string body = JsonConvert.SerializeObject(new { texts = new List<string> { text } });
+            return APIRequestHelper.DoAPIRequest(config.BaseUrl, ApiPath, config.Read_API_KEY, body, "POST");
+        }
+
+        public List<KeywordsResponse> ClassifyTextKeywords(string classifierName, List<string> textList, bool isObject = false)
+        {
+            string ApiPath = CommonUtils.Format(config.ClassifyTextKeywordsUrl, new { username = config.UserName, classifierName = classifierName });
+            string body = JsonConvert.SerializeObject(new { texts = textList });
+            KeywordsResponse[][] keyvalye = APIRequestHelper.DoAPIRequest(config.BaseUrl, ApiPath, config.Read_API_KEY, body, "POST", true);
+            List<List<KeywordsResponse>> keywordListOfList = keyvalye.Select(x => x.ToList()).ToList();
+            var keywordList = keywordListOfList.SelectMany(d => d).ToList();
+            return keywordList;
+        }
+
+        public List<KeywordsResponse> ClassifyTextKeywords(string classifierName, string text, bool isObject = false)
+        {
+            string ApiPath = CommonUtils.Format(config.ClassifyTextKeywordsUrl, new { username = config.UserName, classifierName = classifierName });
+            string body = JsonConvert.SerializeObject(new { texts = text });
+            KeywordsResponse[][] keyvalye = APIRequestHelper.DoAPIRequest(config.BaseUrl, ApiPath, config.Read_API_KEY, body, "POST", true);
+            List<List<KeywordsResponse>> keywordListOfList = keyvalye.Select(x => x.ToList()).ToList();
+            var keywordList = keywordListOfList.SelectMany(d => d).ToList();
+            return keywordList;
         }
 
         public string ClassifyTextWithLanguage(string classifierName, string language, List<string> textList)

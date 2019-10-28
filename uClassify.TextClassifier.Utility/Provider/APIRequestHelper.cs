@@ -23,10 +23,21 @@ namespace uClassify.TextClassifier.Utility.Provider
                     {
                         error = JsonConvert.DeserializeObject<ErrorResponses>(content);
                     }
-                    
-                    if (!string.IsNullOrEmpty(content) && error.statusCode != 0 && (  error.statusCode!=200 || error.statusCode != 201))
+
+                    if (!string.IsNullOrEmpty(content) && error.statusCode != 0 && (error.statusCode != 200 || error.statusCode != 201))
                     {
-                        throw new System.ArgumentException(error.message);
+                        throw new System.ArgumentException(error.statusCode + " Response Received With " + error.message);
+                    }
+                    else if (!string.IsNullOrEmpty(content) && content.Contains("keyword"))
+                    {
+                        if (isObject)
+                        {
+                            return JsonConvert.DeserializeObject<KeywordsResponse[][]>(content);
+                        }
+                        else
+                        {
+                            return content;
+                        }
                     }
                     else if (!string.IsNullOrEmpty(content))
                     {
@@ -38,7 +49,7 @@ namespace uClassify.TextClassifier.Utility.Provider
                         {
                             return content;
                         }
-                        
+
                     }
                     else
                     {
