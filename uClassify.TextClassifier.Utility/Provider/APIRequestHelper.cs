@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -28,6 +29,7 @@ namespace uClassify.TextClassifier.Utility.Provider
                     {
                         throw new System.ArgumentException(error.statusCode + " Response Received With " + error.message);
                     }
+
                     else if (!string.IsNullOrEmpty(content) && content.Contains("keyword"))
                     {
                         if (isObject)
@@ -39,7 +41,18 @@ namespace uClassify.TextClassifier.Utility.Provider
                             return content;
                         }
                     }
-                    else if (!string.IsNullOrEmpty(content))
+                    else if (!string.IsNullOrEmpty(content) && content.Contains("uniqueFeatures"))
+                    {
+                        if (isObject)
+                        {
+                            return JsonConvert.DeserializeObject<List<ClassifierInformationResponse>>(content);
+                        }
+                        else
+                        {
+                            return content;
+                        }
+                    }
+                    else if (!string.IsNullOrEmpty(content) && content.Contains("textCoverage"))
                     {
                         if (isObject)
                         {

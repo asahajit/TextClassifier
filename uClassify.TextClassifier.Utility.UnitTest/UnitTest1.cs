@@ -52,7 +52,10 @@ namespace uClassify.TextClassifier.Utility.UnitTest
         }
         public void TestMethod4()
         {
-            
+            uClassifyInterface IuClassify = new uClassifyProvider();
+
+            var A = IuClassify.CreateClassifier("Demo");
+            var B = IuClassify.RemoveClassifier("Demo");
         }
     }
 }

@@ -82,22 +82,45 @@ namespace uClassify.TextClassifier.Utility.Provider
 
         public string ClassifyTextWithLanguage(string classifierName, string language, List<string> textList)
         {
-            throw new NotImplementedException();
+            string ApiPath = CommonUtils.Format(config.ClassifyTextUrl, new { username = config.UserName, classifierName = classifierName, language= language });
+            string body = JsonConvert.SerializeObject(new { texts = textList });
+            return APIRequestHelper.DoAPIRequest(config.BaseUrl, ApiPath, config.Read_API_KEY, body, "POST");
+        }
+        public ClassificationResponse ClassifyTextWithLanguage(string classifierName, string language, List<string> textList,bool isObject)
+        {
+            string ApiPath = CommonUtils.Format(config.ClassifyTextUrl, new { username = config.UserName, classifierName = classifierName, language = language });
+            string body = JsonConvert.SerializeObject(new { texts = textList });
+            return APIRequestHelper.DoAPIRequest(config.BaseUrl, ApiPath, config.Read_API_KEY, body, "POST", isObject);
         }
 
         public string ClassifyTextWithLanguage(string classifierName, string language, string text)
         {
-            throw new NotImplementedException();
+            string ApiPath = CommonUtils.Format(config.ClassifyTextUrl, new { username = config.UserName, classifierName = classifierName, language = language });
+            string body = JsonConvert.SerializeObject(new { texts = text });
+            return APIRequestHelper.DoAPIRequest(config.BaseUrl, ApiPath, config.Read_API_KEY, body, "POST");
+        }
+        public ClassificationResponse ClassifyTextWithLanguage(string classifierName, string language, string text,bool isObject)
+        {
+            string ApiPath = CommonUtils.Format(config.ClassifyTextUrl, new { username = config.UserName, classifierName = classifierName, language = language });
+            string body = JsonConvert.SerializeObject(new { texts = text });
+            return APIRequestHelper.DoAPIRequest(config.BaseUrl, ApiPath, config.Read_API_KEY, body, "POST", isObject);
         }
 
-        public string CreateClassifier(string classifierName)
+        public bool CreateClassifier(string classifierName)
         {
-            throw new NotImplementedException();
+            string ApiPath = CommonUtils.Format(config.CreateClassifierUrl, new { classifierName = classifierName });
+            return APIRequestHelper.DoAPIRequest(config.BaseUrl, ApiPath, config.Write_API_KEY, "", "POST");
         }
 
         public string GetClassifierInformation(string classifierName)
         {
-            throw new NotImplementedException();
+            string ApiPath = CommonUtils.Format(config.GetClassifierInformationUrl, new { username=config.UserName, classifierName = classifierName });
+            return APIRequestHelper.DoAPIRequest(config.BaseUrl, ApiPath, config.Write_API_KEY, "", "POST");
+        }
+        public List<ClassifierInformationResponse> GetClassifierInformation(string classifierName,bool isObject)
+        {
+            string ApiPath = CommonUtils.Format(config.GetClassifierInformationUrl, new { username = config.UserName, classifierName = classifierName });
+            return APIRequestHelper.DoAPIRequest(config.BaseUrl, ApiPath, config.Write_API_KEY, "", "POST",isObject);
         }
         public bool AddClassifierClass(string classifierName, string className)
         {
@@ -105,34 +128,45 @@ namespace uClassify.TextClassifier.Utility.Provider
             string body = JsonConvert.SerializeObject(new { className = className });
             return APIRequestHelper.DoAPIRequest(config.BaseUrl, ApiPath, config.Write_API_KEY, body, "POST");
         }
-        public string RemoveClassifier(string classifierName)
+        public bool RemoveClassifier(string classifierName)
         {
-            throw new NotImplementedException();
+            string ApiPath = CommonUtils.Format(config.RemoveClassifierUrl, new { classifierName = classifierName });
+            return APIRequestHelper.DoAPIRequest(config.BaseUrl, ApiPath, config.Write_API_KEY, "", "POST");
         }
 
         public string RemoveClassifierClass(string classifierName, string className)
         {
-            throw new NotImplementedException();
+            string ApiPath = CommonUtils.Format(config.RemoveClassifierClassUrl, new { classifierName = classifierName });
+            string body = JsonConvert.SerializeObject(new { className = className });
+            return APIRequestHelper.DoAPIRequest(config.BaseUrl, ApiPath, config.Write_API_KEY, body, "POST");
         }
 
         public string TrainClassifier(string classifierName, string className, List<string> textList)
         {
-            throw new NotImplementedException();
+            string ApiPath = CommonUtils.Format(config.TrainClassifierUrl, new { classifierName = classifierName , className = className, });
+            string body = JsonConvert.SerializeObject(new { texts = textList });
+            return APIRequestHelper.DoAPIRequest(config.BaseUrl, ApiPath, config.Read_API_KEY, body, "POST");
         }
 
         public string TrainClassifier(string classifierName, string className, string text)
         {
-            throw new NotImplementedException();
+            string ApiPath = CommonUtils.Format(config.TrainClassifierUrl, new { classifierName = classifierName, className = className, });
+            string body = JsonConvert.SerializeObject(new { texts = text });
+            return APIRequestHelper.DoAPIRequest(config.BaseUrl, ApiPath, config.Read_API_KEY, body, "POST");
         }
 
         public string UnTrainClassifier(string classifierName, string className, List<string> textList)
         {
-            throw new NotImplementedException();
+            string ApiPath = CommonUtils.Format(config.UnTrainClassifierUrl, new { classifierName = classifierName, className = className, });
+            string body = JsonConvert.SerializeObject(new { texts = textList });
+            return APIRequestHelper.DoAPIRequest(config.BaseUrl, ApiPath, config.Read_API_KEY, body, "POST");
         }
 
         public string UnTrainClassifier(string classifierName, string className, string text)
         {
-            throw new NotImplementedException();
+            string ApiPath = CommonUtils.Format(config.UnTrainClassifierUrl, new { classifierName = classifierName, className = className, });
+            string body = JsonConvert.SerializeObject(new { texts = text });
+            return APIRequestHelper.DoAPIRequest(config.BaseUrl, ApiPath, config.Read_API_KEY, body, "POST");
         }
 
         

@@ -29,13 +29,6 @@ namespace uClassify.TextClassifier.Utility.Models.Request
                 return ConfigurationManager.AppSettings["Write_API_KEY"];
             }
         }
-        public string ClassifyTextUrl
-        {
-            get
-            {
-                return ConfigurationManager.AppSettings["ClassifyTextUrl"];
-            }
-        }
         public string UserName
         {
             get
@@ -43,6 +36,14 @@ namespace uClassify.TextClassifier.Utility.Models.Request
                 return ConfigurationManager.AppSettings["UserName"];
             }
         }
+        public string ClassifyTextUrl
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["ClassifyTextUrl"];
+            }
+        }
+       
         public string ClassifyTextWithLanguageUrl
         {
             get
